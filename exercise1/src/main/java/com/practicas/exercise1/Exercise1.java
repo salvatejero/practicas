@@ -1,4 +1,4 @@
-package com.minsait.practices.exercise1;
+package com.practicas.exercise1;
 
 public class Exercise1 {
 
