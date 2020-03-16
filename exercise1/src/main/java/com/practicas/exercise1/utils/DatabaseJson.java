@@ -1,4 +1,4 @@
-package com.minsait.practices.exercise1.utils;
+package com.practicas.exercise1.utils;
 
 import org.json.JSONArray;
 

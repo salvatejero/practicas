@@ -1,4 +1,4 @@
-package com.practices.exercise1.utils;
+package com.practicas.exercise2.utils;
 
 import org.json.JSONArray;
 
