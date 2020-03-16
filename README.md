@@ -10,12 +10,12 @@ Esta primera fase consta de varias clases `main` que deben ejecutar las siguient
 
 Función que nos devuelva:
 
-- Todas las marcas junto a sus modelos.
-- Marca y modelo de los coches que tengan más de 150 CV de potencia.
+- Las marcas y modelos entre el 24 y el 32.
+- Marca y modelo de los 10 primeros coches que tengan más de 150 CV de potencia.
 - Marca y modelo de los coches que son automáticos.
 - Marca y modelo de los coches que tienen tracción trasera.
 - Marca y modelo de los coches que son diesel.
-- Marca y modelo de los coches del 2011.
+- Las 30 primeras marcas y modelos de los coches del 2011 ordenados por potencia.
 - Modelos cuyo séptimo carácter sea un número.
 - Modelo y marca de los coches que sean híbridos.
 - Modelo de los coches que tenga un longitud mayor de 207 y la décima letra del modelo debe de ir en mayúsculas. Ordenándolos de menor a mayor.
