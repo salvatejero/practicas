@@ -9,13 +9,18 @@ public class CarService {
 	
 	public static JSONArray getMarcaModelo(int start, int stop) {
 		
-		JSONArray array = DatabaseJson.loadDatabase().getData();
+		// comprobamos los parámetros de entrada
 		
+		if( start < 0 || start >= stop ) {
+			return null;
+		}
+		JSONArray array = DatabaseJson.loadDatabase().getData();
 		JSONArray arrayReturn = new JSONArray();
 		
 		int begin = start;
 		int end = stop;
-		if(end == 0) {
+		// si end es mayor que la longitud, end lo asignamos a la longitud
+		if(end == 0 || end > array.length()) {
 			end = array.length();
 		}
 		
