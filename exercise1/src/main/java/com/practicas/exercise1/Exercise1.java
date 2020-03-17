@@ -19,6 +19,8 @@ public class Exercise1 {
         System.out.println("RESULT  1.2 - 2" +  CarService.getMarcaModeloGTHorsePower2(10, 150));
         System.out.println("RESULT  1.2 - 3" +  CarService.getMarcaModeloGTHorsePower2(10, 150));
         
+        System.out.println("RESULT  1.7 " +  CarService.getMarcaModeloThanCharacterXIsNaN(9));
+        
         System.out.println("Exercise 1 END");
         
         
