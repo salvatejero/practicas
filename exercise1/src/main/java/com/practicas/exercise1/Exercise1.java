@@ -6,6 +6,8 @@ public class Exercise1 {
 
     public static void main(String[] args){
 
+    	CarService.tipoClasificacion(null, "Automatic transmission");
+    	
         System.out.println("Exercise 1");
         
         System.out.println("Exercise 1.1");

@@ -89,13 +89,15 @@ public class CarService {
 		}
 		JSONArray array = DatabaseJson.loadDatabase().getData();
 		JSONArray arrayReturn = new JSONArray();
-		for(int i=0; i<array.length() || i < count; i++) {
+		int contador = 0;
+		for(int i=0; i<array.length() || contador < count; i++) {
 			JSONObject jObj = (JSONObject) array.get(i);
 			if(jObj.getJSONObject("Engine Information").getJSONObject("Engine Statistics").getInt("Horsepower") > 150) {
 		    	JSONObject objReturn = new JSONObject();
 				objReturn.put("make", jObj.getJSONObject("Identification").getString("Make"));
 				objReturn.put("model", jObj.getJSONObject("Identification").getString("ID"));
 		    	arrayReturn.put(objReturn);
+		    	contador ++;
 		    }
 		}
 			
@@ -143,7 +145,7 @@ public class CarService {
 		for(int i = 0; i < array.length(); i++) {
 			JSONObject objReturn = new JSONObject();
 			JSONObject jObj = array.getJSONObject(i);
-			if(jObj.getString("transmission").indexOf("Automatic") >= 0) {
+			if(jObj.getString("transmission").toLowerCase().indexOf("automatic") >= 0) {
 				objReturn.put("make", jObj.getString("make"));
 				objReturn.put("model", jObj.getString("model"));
 				arrayReturn.put(objReturn);
@@ -233,6 +235,30 @@ public class CarService {
 			arrayReturn.put(jsonObject);
 		}
 		
+		return arrayReturn;
+	}
+	
+	
+	public static JSONArray tipoClasificacion(JSONArray array, String clasificacion) {
+		array = DatabaseJson.loadDatabase().getData();
+		if(clasificacion == null || clasificacion.equals("")) {
+			return null;
+		}
+		JSONArray arrayReturn = new JSONArray();
+		// se recorre el array de coches
+		for (int i = 0; i < array.length(); i++) {
+			// recoge marca y modelo de coche en un jsonobject de los que coincidan con la
+			// clasificacion especificada
+			String objeto = ((JSONObject) array.get(i)).getJSONObject("Identification").getString("Classification");
+			if (objeto.equals(clasificacion)) {
+				JSONObject objReturn = new JSONObject();
+				JSONObject jObj = array.getJSONObject(i);
+				objReturn.put("make", jObj.getJSONObject("Identification").getString("Make"));
+				objReturn.put("model", jObj.getJSONObject("Identification").getString("ID"));
+				// se añade el jsonobject al jsonarray de retorno
+				arrayReturn.put(objReturn);
+			}
+		}
 		return arrayReturn;
 	}
 	
