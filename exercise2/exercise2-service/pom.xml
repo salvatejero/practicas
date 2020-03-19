@@ -9,7 +9,7 @@
 	</parent>
 	<packaging>jar</packaging>
 	<artifactId>exercise2-service</artifactId>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>com.practicas</groupId>
@@ -18,5 +18,21 @@
 		</dependency>
 
 	</dependencies>
-
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>8</source>
+					<target>8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+	</build>
 </project>

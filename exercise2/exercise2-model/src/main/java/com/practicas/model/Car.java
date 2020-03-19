@@ -2,6 +2,7 @@ package com.practicas.model;
 
 public class Car {
 
+	private int pk;
 	private EngineInformation engineinformation;
 	private Dimensions dimensions;
 	private Identification identification;
@@ -11,9 +12,10 @@ public class Car {
 		
 	}
 
-	public Car(EngineInformation engineinformation, Dimensions dimensions, Identification identification,
+	public Car(int pk, EngineInformation engineinformation, Dimensions dimensions, Identification identification,
 			FuelInformation fuelinformation) {
 		super();
+		this.pk = pk;
 		this.engineinformation = engineinformation;
 		this.dimensions = dimensions;
 		this.identification = identification;
@@ -52,6 +54,15 @@ public class Car {
 		this.fuelinformation = fuelinformation;
 	}
 
+	public int getPk() {
+		return pk;
+	}
+
+	public void setPk(int pk) {
+		this.pk = pk;
+	}
+
+	
 	@Override
 	public String toString() {
 		return "{engineinformation: "+engineinformation+",dimensions: "+dimensions.toString()+"}";
