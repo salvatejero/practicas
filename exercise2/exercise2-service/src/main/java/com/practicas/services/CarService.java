@@ -44,9 +44,12 @@ public class CarService {
 	
 	public static List<Car> getCars(int start, int end, Predicate<Car> p, CarComparator comparator){
 		
-		assert comparator != null;
 		List<Car> cars = getCars( start,  end,  p);
-		return cars.stream().sorted(comparator).collect(Collectors.toList());
+		if(comparator != null) {
+			return cars.stream().sorted(comparator).collect(Collectors.toList());
+		}
+		
+		return cars.stream().sorted().collect(Collectors.toList());
 	}
 	
 	

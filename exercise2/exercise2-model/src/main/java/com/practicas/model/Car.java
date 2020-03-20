@@ -1,6 +1,6 @@
 package com.practicas.model;
 
-public class Car {
+public class Car implements Comparable<Car>{
 
 	private int pk;
 	private EngineInformation engineinformation;
@@ -61,13 +61,23 @@ public class Car {
 	public void setPk(int pk) {
 		this.pk = pk;
 	}
-
 	
+	@Override
+	public int compareTo(Car o) {
+		
+		return this.getIdentification().getId().compareTo(o.getIdentification().getId());
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		Car c1 = (Car)obj;
+		return this.getPk() == c1.getPk();
+	}
+
 	@Override
 	public String toString() {
 		return "{engineinformation: "+engineinformation+",dimensions: "+dimensions.toString()+"}";
 	}
-	
-	
+		
 	
 }
