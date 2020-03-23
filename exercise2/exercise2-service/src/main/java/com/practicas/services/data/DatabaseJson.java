@@ -25,6 +25,8 @@ public class DatabaseJson {
 
     private static final Logger _log = Logger.getLogger(DatabaseJson.class.getName());
     
+    private static DatabaseJson db;
+    
     private DatabaseJson() {
         try{
             loadJSONDB();
@@ -35,7 +37,10 @@ public class DatabaseJson {
 
     public static DatabaseJson loadDatabase() {
 
-        return new DatabaseJson();
+    	if(db == null) {
+    		db = new DatabaseJson();
+    	}
+        return db; 
     }
 
     private void loadJSONDB() throws IOException {
