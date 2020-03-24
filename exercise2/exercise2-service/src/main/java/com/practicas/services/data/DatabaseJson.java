@@ -46,7 +46,7 @@ public class DatabaseJson {
     private void loadJSONDB() throws IOException {
 
         InputStream inputStream = this.getClass()
-                .getClassLoader().getResourceAsStream("cars-id.json");
+                .getClassLoader().getResourceAsStream("cars-id-corregido.json");
 
         if (inputStream == null) return;
 
@@ -63,7 +63,7 @@ public class DatabaseJson {
     	
     	BufferedWriter bufferWriter = null;
     	try {
-    		FileWriter crunchifyWriter = new FileWriter("/Users/stejeros/Developer/source/practicas/exercise2/exercise2-service/src/main/resources/cars-id.json", true);
+    		FileWriter crunchifyWriter = new FileWriter("/Users/stejeros/Developer/source/practicas/exercise2/exercise2-service/src/main/resources/cars-id-corregido.json", true);
 
 			// Writes text to a character-output stream
 			bufferWriter = new BufferedWriter(crunchifyWriter);
