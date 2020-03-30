@@ -14,5 +14,15 @@
 		<servlet-name>MainServlet</servlet-name>
 		<url-pattern></url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>UpdateCarServlet</servlet-name>
+		<servlet-class>com.practicas.servlet.UpdateCarServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdateCarServlet</servlet-name>
+		<url-pattern>/update</url-pattern>
+	</servlet-mapping>
+	
 
 </web-app> 

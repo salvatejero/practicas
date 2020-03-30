@@ -1,3 +1,6 @@
+<%@page import="java.io.UnsupportedEncodingException"%>
+<%@page import="java.nio.charset.StandardCharsets"%>
+<%@page import="java.net.URLEncoder"%>
 <%@page import="com.practicas.model.Identification"%>
 <%@page import="com.practicas.model.Car"%>
 <%@page import="java.util.List"%>
@@ -13,6 +16,10 @@
 	</head>
 <body>
 	<%
+	
+	System.out.println(request.getQueryString());
+	
+	
 	
 	String pageActual = (String)request.getAttribute("page");
 	Long total = (Long)request.getAttribute("total");
@@ -47,6 +54,9 @@
 		<div class="row">
 			<div class="col-sm-2"></div>
 			<div class="col-sm-8">
+				<input type="hidden" name="page" id="page" value="<%=pageActual%>"/>
+				<input type="hidden" name="makeFilterValue" id="makeFilterValue" value="<%=make%>"/>
+				<input type="hidden" name="yearFilterValue" id="yearFilterValue" value="<%=yearP%>"/>
 				<h1>Listado de coches</h1>
 				<nav class="navbar navbar-expand-lg navbar-light bg-light">
 					<div class="container-fluid">
@@ -54,14 +64,14 @@
 	  					<div class=" navbar-collapse" id="navbarNav">
 						    <ul class="navbar-nav">
 						      <li class="nav-item active">
-						        <select class="selectpicker" data-live-search="true" title="Filter by makes">
+						        <select class="selectpicker filterMake" data-live-search="true" title="Filter by makes">
 								  <%for(String iden: identifications){ %>
 								  	<option <%if (iden.equals(make)){ %> selected <%} %> value="<%=iden %>" ><%=iden %></option>
 								  <% }%>
 								</select>
 						      </li>
 						      <li class="nav-item">
-						        <select class="selectpicker" data-live-search="true" title="Filter by year">
+						        <select class="selectpicker filterYear" data-live-search="true" title="Filter by year">
 								  <%for(Integer year: years){ %>
 								  	<option <%if (year.equals(yearP)){ %> selected <%} %> value="<%=year %>"><%=year %></option>
 								  <% }%>
@@ -83,6 +93,7 @@
 							<th scope="col">Model</th>
 							<th scope="col">Year</th>
 							<th scope="col">Combustible</th>
+							<th scope="col">Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -98,6 +109,16 @@
 								<td><%=c.getIdentification().getId()%></td>
 								<td><%=c.getIdentification().getYear() %></td>
 								<td><%=c.getFuelinformation().getFueltype() %></td>
+								<td>
+									<div class="dropdown">
+									  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Acciones
+									  <span class="caret"></span></button>
+									  <ul class="dropdown-menu">
+									    <li><a href="./?action=detail&pk=<%=c.getPk() %>&redirect=<%=encodeValue(request.getQueryString())%>">Detalle</a></li>
+									    <li><a href="#">Eliminar</a></li>
+									  </ul>
+									</div>
+								</td>
 							</tr>
 							<%}
 
@@ -109,9 +130,7 @@
 				<%
 				
 				
-				
 				%>
-				
 				<nav aria-label="...">
 				  <ul class="pagination">
 				    <li class="page-item" <%if(prev<0){ %> disabled="disabled" <%} %> >
@@ -135,9 +154,47 @@
 			<div class="col-sm-2"></div>
 		</div>
 	</div>
+	<%!  private static String encodeValue(String value) {
+        String url = "";
+		try {
+			url = URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
+        } catch (Exception ex) {
+            
+        }
+		return url;
+    } %>
+	
 	<script src="./js/jquery-3.4.1.slim.min.js" ></script>
     <script src="./js/popper.min.js" ></script>
     <script src="./js/bootstrap-select.min.js" ></script>
     <script src="./js/bootstrap.min.js"></script>
+    
+    <script type="text/javascript">
+    
+    	$(document).ready(function(){
+    		$('.filterYear').change(function (){
+    	        var valor = $(this). children("option:selected"). val();
+    	        location.href = './?action=pagination&filterYear='+valor+'&filterMake='+$('#makeFilterValue').val()+'&page='+$('#page').val();
+    	    });
+    	   	$('.filterMake').change(function (){
+    	        var valor = $(this). children("option:selected"). val();
+    	        location.href = './?action=pagination&filterMake='+valor+'&filterYear='+$('#yearFilterValue').val()+'&page='+$('#page').val();
+    	   	});
+    	});
+	    
+    
+    	function modoOscuro(){
+    		
+    		if($(table).hasClass('table-dark')){
+    			$(table).addClass('.table-light');
+    			$(table).removeClass('.table-dark');
+    		}else{
+    			$(table).removeClass('.table-light');
+    			$(table).addClass('.table-dark');
+    		}
+    		
+    	}
+    	
+    </script>
 </body>
 </html>

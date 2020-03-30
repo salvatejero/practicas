@@ -65,7 +65,11 @@ public class Car implements Comparable<Car>{
 	@Override
 	public int compareTo(Car o) {
 		
-		return this.getIdentification().getId().compareTo(o.getIdentification().getId());
+		if (this.getPk() <= o.getPk()) {
+			return -1;
+		}else {
+			return 1;
+		}
 	}
 
 	@Override

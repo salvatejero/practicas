@@ -3,6 +3,7 @@ package com.practicas.services;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -38,7 +39,7 @@ public class CarService {
 			end = listCar.size();
 		}
 		
-		return listCar.subList(begin, end);
+		return listCar.stream().sorted().collect(Collectors.toList()).subList(begin, end);
 	}
 	
 	/**
