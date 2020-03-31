@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ import com.practicas.model.Car;
 import com.practicas.services.CarService;
 import com.practicas.services.data.DatabaseJson;
 
+@WebServlet(name = "UpdateCarServlet", urlPatterns = { "/update" })
 public class UpdateCarServlet extends HttpServlet {
 
 	/**

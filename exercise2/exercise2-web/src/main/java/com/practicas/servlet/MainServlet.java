@@ -3,19 +3,32 @@ package com.practicas.servlet;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebInitParam;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.practicas.services.CarService;
 import com.practicas.servlet.controller.MainController;
 
+@WebServlet(name = "MainServlet", 
+	urlPatterns = { "", "/cars" }, 
+	initParams = @WebInitParam(name = "location", value = "Hola"),
+	loadOnStartup = 1)
 public class MainServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String location = getInitParameter("location");
+		
+		
+		HttpSession session = request.getSession(true);
+		session.setAttribute("username", "PEPE");
 		
 		//super.doGet(request, response);
 		String action = request.getParameter("action");
