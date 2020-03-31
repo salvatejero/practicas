@@ -14,7 +14,7 @@ import com.practicas.services.CarService;
 import com.practicas.servlet.controller.MainController;
 
 @WebServlet(name = "MainServlet", 
-	urlPatterns = { "", "/cars" }, 
+	urlPatterns = { "/cars" }, 
 	initParams = @WebInitParam(name = "location", value = "Hola"),
 	loadOnStartup = 1)
 public class MainServlet extends HttpServlet {
@@ -25,10 +25,6 @@ public class MainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String location = getInitParameter("location");
-		
-		
-		HttpSession session = request.getSession(true);
-		session.setAttribute("username", "PEPE");
 		
 		//super.doGet(request, response);
 		String action = request.getParameter("action");

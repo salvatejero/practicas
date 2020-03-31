@@ -59,7 +59,7 @@ public class UpdateCarServlet extends HttpServlet {
 			}
 		}
 		
-		request.getRequestDispatcher("./?"+decodeValue(redirect)).forward(request, response);;
+		request.getRequestDispatcher("../?"+decodeValue(redirect)).forward(request, response);;
 	
 	}
 	

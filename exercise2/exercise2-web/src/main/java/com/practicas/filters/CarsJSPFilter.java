@@ -30,9 +30,6 @@ public class CarsJSPFilter implements Filter {
 		System.out.println(hRequest.getRequestURI());
 		
 		hResponse.sendError(403, "no autorizado");
-		
-		
-		
 	}
 
 	@Override
