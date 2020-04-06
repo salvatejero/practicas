@@ -41,7 +41,7 @@ public class UpdateCarServlet extends HttpServlet {
 		// Validar 
 		
 		
-		Optional<Car> carOp = CarService.getCarByPk(Integer.valueOf(pk));
+		/*Optional<Car> carOp = CarService.getCarByPk(Integer.valueOf(pk));
 		
 		if(carOp.isPresent()) {
 			
@@ -57,7 +57,7 @@ public class UpdateCarServlet extends HttpServlet {
 				}
 				contador ++;
 			}
-		}
+		}*/
 		
 		request.getRequestDispatcher("../?"+decodeValue(redirect)).forward(request, response);;
 	

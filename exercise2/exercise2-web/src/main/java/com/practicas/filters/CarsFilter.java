@@ -29,7 +29,7 @@ public class CarsFilter implements Filter {
 		
 		System.out.println(hRequest.getRequestURI());
 		
-		if(hRequest.getRequestURI().equals("login") || (hRequest.getSession(false) != null && hRequest.getSession(false).getAttribute("username") != null)) {
+		if(hRequest.getRequestURI().indexOf("login") > 0 || (hRequest.getSession(false) != null && hRequest.getSession(false).getAttribute("username") != null)) {
 			chain.doFilter(request, response);
 		}else {
 			hRequest.setAttribute("message", "Unauthorized");

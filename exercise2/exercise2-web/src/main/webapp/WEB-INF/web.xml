@@ -12,4 +12,15 @@
         <session-timeout>10</session-timeout>
     </session-config>
 
+	<context-param>
+    	<param-name>contextConfigLocation</param-name>
+    	<param-value>/WEB-INF/app.xml</param-value>
+  	</context-param>
+
+  	<listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+  	</listener>
+
 </web-app>
