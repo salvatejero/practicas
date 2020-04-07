@@ -130,7 +130,7 @@ public class CarServiceImpl implements CarService {
 		return stream.count();
 	}
 	
-	public List<Car> getCars(int start, int end, Predicate<Car> p, CarComparator comparator){
+	public List<Car> getCars(int start, int end, List<Predicate<Car>> p, CarComparator comparator){
 		
 		List<Car> cars = getCars( -1, -1, p);
 		long total = getCarsCount(p);
@@ -148,12 +148,12 @@ public class CarServiceImpl implements CarService {
 		return cars.stream().sorted().collect(Collectors.toList()).subList(start, end);
 	}
 	
-	
+	/*
 	public List<Car> getCars(int start, int end, Predicate<Car> p, CarComparator comparator, int limit){
 		
 		List<Car> cars = getCars( start, end, p, comparator);
 		return cars.stream().limit(limit).collect(Collectors.toList());
-	}
+	}*/
 	
 	
 	public Optional<Car> getCarByPk(int pk) {
