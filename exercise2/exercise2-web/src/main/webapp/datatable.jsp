@@ -48,43 +48,9 @@
 				<input type="hidden" name="makeFilterValue" id="makeFilterValue" value="<%=make%>"/>
 				<input type="hidden" name="yearFilterValue" id="yearFilterValue" value="<%=yearP%>"/>
 				<h1>Listado de coches</h1>
-				<nav class="navbar navbar-expand-lg navbar-light bg-light">
-					<div class="container-fluid">
-	  					<span class="navbar-brand mb-0 h1">Acciones</span>
-	  					<div class=" navbar-collapse" id="navbarNav">
-						    <ul class="navbar-nav">
-						      <li class="nav-item active">
-						        <select class="selectpicker filterMake" data-live-search="true" title="Filter by makes">
-								  <%for(String iden: identifications){ %>
-								  	<option <%if (iden.equals(make)){ %> selected <%} %> value="<%=iden %>" ><%=iden %></option>
-								  <% }%>
-								</select>
-						      </li>
-						      <li class="nav-item">
-						        <select class="selectpicker filterYear" data-live-search="true" title="Filter by year">
-								  <%for(Integer year: years){ %>
-								  	<option <%if (year.equals(yearP)){ %> selected <%} %> value="<%=year %>"><%=year %></option>
-								  <% }%>
-								</select>
-						      </li>
-						    </ul>
-					  	</div>
-					  	<span style="padding-right: 10px;">Se han encontrado <strong> <%=total %></strong> coches</span>
-	  					<form class="form-inline my-2 my-lg-0">
-	      					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-	      					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-	    				</form>
-    				</div>
-				</nav>	
+				
 				<table id="carsTable" class="table table-bordered">
 					<thead class="thead-light">
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">Model</th>
-							<th scope="col">Year</th>
-							<th scope="col">Combustible</th>
-							<th scope="col">Acciones</th>
-						</tr>
 					</thead>
 					<tbody>
 					
@@ -120,7 +86,14 @@
     	$(document).ready(function(){
     		
     		$('#carsTable').DataTable( {
-    		    ajax: './carsJSON'
+    			ajax: {
+    		        url: './carsJSON',
+    		        dataSrc: 'cars'
+    		    },
+    		    columns: [
+    		        { data: 'pk' },
+    		        { data: 'identification.id' }
+    		    ]
     		} );
     		
     		$('.filterYear').change(function (){
