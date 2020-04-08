@@ -1,9 +1,6 @@
 package com.practicas.servlet;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
@@ -22,9 +19,6 @@ public class MainServlet extends AbstractServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String location = getInitParameter("location");
-		
-		//super.doGet(request, response);
 		String action = request.getParameter("action");
 		String dispatcher = "./index.jsp";
 		if(action == null && !"".equals(action)) {
@@ -41,10 +35,8 @@ public class MainServlet extends AbstractServlet {
 				dispatcher = "./error.jsp";
 			}
 			
-		}
-		
-		if(request.getParameter("parse") != null && !request.getParameter("parse").equals("")) {
-			dispatcher = "./json.jsp";
+		}else if("datatable".equals(action)) {
+			dispatcher = "./datatable.jsp";
 		}
 		
 		request.setAttribute("years", utilsService.getCarsYears());
