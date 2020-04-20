@@ -1,6 +1,5 @@
 <%@page import="java.io.UnsupportedEncodingException"%>
 <%@page import="java.nio.charset.StandardCharsets"%>
-<%@page import="com.practicas.model.Identification"%>
 <%@page import="com.practicas.model.Car"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="application/json; charset=UTF-8"

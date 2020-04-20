@@ -13,6 +13,8 @@ public interface CarService {
 	
 	public List<Car> getCars();
 	
+	public List<Car> getCars(List<Predicate<Car>> ps);
+	
 	public List<Car> getCars(int start, int end, List<Predicate<Car>> ps);
 	
 	public List<Car> getCars(int start, int end, List<Predicate<Car>> p, CarComparator comparator);
@@ -20,5 +22,7 @@ public interface CarService {
 	public long getTotalCar();
 	
 	public long getCarsCount(List<Predicate<Car>> ps);
+	
+	public Car save(Car c);
 	
 }

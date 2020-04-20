@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 
 import com.practicas.model.Car;
 import com.practicas.services.CarService;
-import com.practicas.services.impl.CarServiceImpl;
 
 @Controller("mainController")
 public class MainController {

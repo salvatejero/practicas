@@ -1,6 +1,5 @@
 <%@page import="java.io.UnsupportedEncodingException"%>
 <%@page import="java.nio.charset.StandardCharsets"%>
-<%@page import="com.practicas.model.Identification"%>
 <%@page import="com.practicas.model.Car"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -32,18 +31,18 @@
 			<div class="col-sm-8">
 				<form action="./update" method="post">
 					<input type="hidden" name="action" value="updateCar"/>
-					<input type="hidden" name="pk" value="<%=car.getPk()%>"/>
+					<input type="hidden" name="pk" value="<%=car.getId()%>"/>
 					<input type="hidden" name="redirect" value="<%=encodeValue(request.getAttribute("redirect").toString()) %>"/>
 					<fieldset>
 						<legend>Engine Information</legend>
 						<div class="form-group">
 						    <label for="enginetype">Engine Type</label>
-						    <input type="text" name="enginetype" class="form-control" id="enginetype" aria-describedby="enginetypeHelp" value="<%=car.getEngineinformation().getEnginetype() %>" placeholder="Introduce un Engine Type">
+						    <input type="text" name="enginetype" class="form-control" id="enginetype" aria-describedby="enginetypeHelp" value="<%=car.getEnginetype() %>" placeholder="Introduce un Engine Type">
 						    <small id="enginetypeHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
 						</div>
 						<div class="form-group">
 						    <label for="enginetype">DriveLine</label>
-						    <input type="text" name="driveline" class="form-control" id="enginetype" aria-describedby="enginetypeHelp" value="<%=car.getEngineinformation().getDriveline() %>" placeholder="Introduce un Engine Type">
+						    <input type="text" name="driveline" class="form-control" id="enginetype" aria-describedby="enginetypeHelp" value="<%=car.getDriveLine().getDriveLine() %>" placeholder="Introduce un Engine Type">
 						    <small id="enginetypeHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
 						</div>
 					</fieldset>

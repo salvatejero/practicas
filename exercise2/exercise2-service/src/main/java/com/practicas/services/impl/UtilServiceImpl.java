@@ -1,5 +1,6 @@
 package com.practicas.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,7 +22,9 @@ public class UtilServiceImpl implements UtilsService{
 	 */
 	public List<String> getCarsMakes() {
 		
-		return carService.getCars().stream().map(car -> car.getIdentification().getMake()).distinct().sorted().collect(Collectors.toList());
+		//return carService.getCars().stream().map(car -> car.getIdentification().getMake()).distinct().sorted().collect(Collectors.toList());
+		
+		return new ArrayList<String>();
 	}
 	
 	/**
@@ -30,7 +33,8 @@ public class UtilServiceImpl implements UtilsService{
 	 */
 	public List<Integer> getCarsYears() {
 		
-		return carService.getCars().stream().map(car -> car.getIdentification().getYear()).distinct().sorted().collect(Collectors.toList());
+		//return carService.getCars().stream().map(car -> car.getIdentification().getYear()).distinct().sorted().collect(Collectors.toList());
+		return new ArrayList<Integer>();
 	}
 	
 }

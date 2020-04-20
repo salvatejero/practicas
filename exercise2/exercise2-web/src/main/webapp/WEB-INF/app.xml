@@ -15,6 +15,10 @@
 
 	<context:component-scan base-package="com.practicas.servlet" />
 	
+	<context:component-scan base-package="com.practicas.web" />
+	
 	<context:component-scan base-package="com.practicas.rest" />
+	
+	<context:component-scan base-package="com.practicas.dao" />
 	
 </beans:beans>

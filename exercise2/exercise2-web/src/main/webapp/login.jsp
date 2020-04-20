@@ -1,7 +1,6 @@
 <%@page import="java.io.UnsupportedEncodingException"%>
 <%@page import="java.nio.charset.StandardCharsets"%>
 <%@page import="java.net.URLEncoder"%>
-<%@page import="com.practicas.model.Identification"%>
 <%@page import="com.practicas.model.Car"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

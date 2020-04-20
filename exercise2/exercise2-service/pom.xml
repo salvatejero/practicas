@@ -11,24 +11,18 @@
 	<artifactId>exercise2-service</artifactId>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>com.practicas</groupId>
-			<artifactId>exercise2-model</artifactId>
+			<artifactId>exercise2-dao</artifactId>
 			<version>1.0</version>
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${spring.version}</version>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security}</version>
 		</dependency>
-		
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-
 	</dependencies>
 	<build>
 		<plugins>

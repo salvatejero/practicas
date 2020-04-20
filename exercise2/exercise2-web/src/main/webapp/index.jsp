@@ -1,7 +1,6 @@
 <%@page import="java.io.UnsupportedEncodingException"%>
 <%@page import="java.nio.charset.StandardCharsets"%>
 <%@page import="java.net.URLEncoder"%>
-<%@page import="com.practicas.model.Identification"%>
 <%@page import="com.practicas.model.Car"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -105,16 +104,16 @@
 							for (Car c : cars) { %>
 							
 							<tr>
-								<th scope="row"><%=c.getPk() %></th>
-								<td><%=c.getIdentification().getId()%></td>
-								<td><%=c.getIdentification().getYear() %></td>
-								<td><%=c.getFuelinformation().getFueltype() %></td>
+								<th scope="row"><%=c.getId() %></th>
+								<td><%=c.getMake().getMake()%></td>
+								<td><%=c.getYear() %></td>
+								<td><%=c.getFueltype().getFuelType() %></td>
 								<td>
 									<div class="dropdown">
 									  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Acciones
 									  <span class="caret"></span></button>
 									  <ul class="dropdown-menu">
-									    <li><a href="./?action=detail&pk=<%=c.getPk() %>&redirect=<%=encodeValue(request.getQueryString())%>">Detalle</a></li>
+									    <li><a href="./?action=detail&pk=<%=c.getId() %>&redirect=<%=encodeValue(request.getQueryString())%>">Detalle</a></li>
 									    <li><a href="#">Eliminar</a></li>
 									  </ul>
 									</div>

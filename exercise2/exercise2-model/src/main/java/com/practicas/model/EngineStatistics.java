@@ -2,6 +2,7 @@ package com.practicas.model;
 
 public class EngineStatistics {
 
+	private int id;
 	private int horsepower;
 	private int torque;
 	
@@ -9,10 +10,19 @@ public class EngineStatistics {
 		
 	}
 	
-	public EngineStatistics(int horsepower, int torque) {
+	public EngineStatistics(int id, int horsepower, int torque) {
 		super();
+		this.id = id;
 		this.horsepower = horsepower;
 		this.torque = torque;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getHorsepower() {

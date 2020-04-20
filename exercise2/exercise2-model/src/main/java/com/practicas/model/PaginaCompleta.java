@@ -7,6 +7,7 @@ public class PaginaCompleta {
 
 	
 	private List<Car> cars;
+	
 	private Map<String, List<?>> filters;
 
 	public PaginaCompleta() {

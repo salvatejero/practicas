@@ -8,8 +8,10 @@ import java.util.stream.Stream;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.practicas.dao.CarDao;
 import com.practicas.model.Car;
 import com.practicas.model.comparators.CarComparator;
 import com.practicas.services.CarService;
@@ -20,9 +22,12 @@ public class CarServiceImpl implements CarService {
 
 	public long totalCar;
 	
+	@Autowired
+	private CarDao carDao;
+	
 	@PostConstruct
 	public void init() {
-		DatabaseJson.loadDatabase().getDataParsed();
+		
 	}
 	
 	/**
@@ -35,21 +40,19 @@ public class CarServiceImpl implements CarService {
 		
 		// comprobamos los parámetros de entrada
 		
-		assert start < stop;
-
-		List<Car> listCar = DatabaseJson.loadDatabase().getDataParsed();
-		totalCar = listCar.size();
+		//List<Car> listCar = DatabaseJson.loadDatabase().getDataParsed();
+		//totalCar = listCar.size();
 		int begin = start;
 		if(begin < 0) {
 			begin = 0;
 		}
 		int end = stop;
 		// si end es mayor que la longitud, end lo asignamos a la longitud
-		if(end <= 0 || end > listCar.size()) {
-			end = listCar.size();
+		if(end <= 0 ) {
+			end = 0;
 		}
 		
-		return listCar.stream().sorted().collect(Collectors.toList()).subList(begin, end);
+		return carDao.findPaginationCars(begin, end);
 	}
 	
 	public long getTotalCar() {
@@ -81,6 +84,25 @@ public class CarServiceImpl implements CarService {
 		}
 		
 		return stream.collect(Collectors.toList()).subList(start, end);
+	}
+	
+	/**
+	 * Obtiene los coches que cumplen un predicado
+	 * @param start inicio
+	 * @param end fin
+	 * @param p Predicado
+	 * @return
+	 */
+	public List<Car> getCars(List<Predicate<Car>> ps) {
+		
+		Stream<Car> stream = getCars(-1, -1).stream();
+		if(ps != null) {
+			for(Predicate<Car> p: ps) {
+				stream = stream.filter(p);
+			}
+		}
+		List<Car> cars = stream.collect(Collectors.toList());
+		return cars;
 	}
 	
 	/**
@@ -159,7 +181,12 @@ public class CarServiceImpl implements CarService {
 	public Optional<Car> getCarByPk(int pk) {
 		
 		List<Car> cars = getCars(-1, -1);
-		return cars.stream().filter(c -> c.getPk() == pk).findFirst();
+		return cars.stream().filter(c -> c.getId() == pk).findFirst();
+	}
+
+	@Override
+	public Car save(Car c) {
+		return carDao.save(c);
 	}
 	
 	
