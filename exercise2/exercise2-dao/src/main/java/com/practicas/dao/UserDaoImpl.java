@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.NoResultException;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +12,7 @@ import com.practicas.model.User;
 
 
 @Repository("userDao")
+@Transactional
 public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 
 	public User findById(int id) {

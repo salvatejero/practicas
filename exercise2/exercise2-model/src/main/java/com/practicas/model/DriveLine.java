@@ -1,8 +1,27 @@
 package com.practicas.model;
 
-public class DriveLine {
+import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+@Entity
+@Table(name="DRIVELINE")
+public class DriveLine implements Serializable{
+
+	private static final long serialVersionUID = 5975730285393800405L;
+
+	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	
+	@NotEmpty
+	@Column(name="DRIVELINE", nullable=false)
 	private String driveLine;
 	
 	public DriveLine() {

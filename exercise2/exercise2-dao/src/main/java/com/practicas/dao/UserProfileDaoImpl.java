@@ -3,6 +3,7 @@ package com.practicas.dao;
 import java.util.List;
 
 import javax.persistence.NoResultException;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +12,7 @@ import com.practicas.model.UserProfile;
 
 
 @Repository("userProfileDao")
+@Transactional
 public class UserProfileDaoImpl extends AbstractDao<Integer, UserProfile>implements UserProfileDao{
 
 	public UserProfile findById(int id) {

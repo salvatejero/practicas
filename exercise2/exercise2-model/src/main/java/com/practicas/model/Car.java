@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -26,15 +25,23 @@ public class Car implements Comparable<Car>, Serializable{
 	private int id;
 	
 	// Engine Information
-	@Transient
+	@NotEmpty
+	@OneToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "TRANSMISSION_ID", referencedColumnName = "ID")
 	private Transmission transmission;
 	
 	@NotEmpty
 	@Column(name="ENGINETYPE", nullable=false)
 	private String enginetype;
-	@Transient
+	
+	@NotEmpty
+	@OneToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "ENGINESTATISTICS_ID", referencedColumnName = "ID")
 	private EngineStatistics enginestatistics;
-	@Transient
+	
+	@NotEmpty
+	@OneToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "DRIVELINE_ID", referencedColumnName = "ID")
 	private DriveLine driveLine;
 	
 	
@@ -57,19 +64,27 @@ public class Car implements Comparable<Car>, Serializable{
 	@OneToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "MAKE_ID", referencedColumnName = "ID")
 	private Make make;
-	@Transient
+	@NotEmpty
+	@Column(name="MODELYEAR", nullable=false)
 	private String modelyear;
-	@Transient
+	@NotEmpty
+	@Column(name="NAME", nullable=false)
 	private String name;
-	@Transient
+	@NotEmpty
+	@Column(name="YEAR", nullable=false)
 	private int year;
 	
 	// FuelInformation
-	@Transient
+	@NotEmpty
+	@Column(name="HIGHWAYMPG", nullable=false)
 	private int highwaympg;
-	@Transient
+	@NotEmpty
+	@Column(name="CITYMPH", nullable=false)
 	private int citymph;
-	@Transient
+	
+	@NotEmpty
+	@OneToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "fUELTYPE_ID", referencedColumnName = "ID")
 	private FuelType fueltype;
 	
 	public Car() {

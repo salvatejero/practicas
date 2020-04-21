@@ -18,7 +18,7 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name="USER_")
+@Table(name="USER")
 public class User implements Serializable{
 
 	private static final long serialVersionUID = 5199726122007038726L;
