@@ -1,3 +1,4 @@
+<%@page import="com.practicas.model.Make"%>
 <%@page import="java.io.UnsupportedEncodingException"%>
 <%@page import="java.nio.charset.StandardCharsets"%>
 <%@page import="java.net.URLEncoder"%>
@@ -38,7 +39,7 @@
 	}
 	next = pagei+1;
 	
-	List<String> identifications = (List<String>)request.getAttribute("makes");
+	List<Make> identifications = (List<Make>)request.getAttribute("makes");
 	List<Integer> years = (List<Integer>)request.getAttribute("years");
 	List<Car> cars = (List<Car>) request.getAttribute("cars");
 	%>
@@ -64,8 +65,8 @@
 						    <ul class="navbar-nav">
 						      <li class="nav-item active">
 						        <select class="selectpicker filterMake" data-live-search="true" title="Filter by makes">
-								  <%for(String iden: identifications){ %>
-								  	<option <%if (iden.equals(make)){ %> selected <%} %> value="<%=iden %>" ><%=iden %></option>
+								  <%for(Make iden: identifications){ %>
+								  	<option <%if (iden.getId()== Integer.valueOf(make)){ %> selected <%} %> value="<%=iden.getId() %>" ><%=iden.getMake() %></option>
 								  <% }%>
 								</select>
 						      </li>
