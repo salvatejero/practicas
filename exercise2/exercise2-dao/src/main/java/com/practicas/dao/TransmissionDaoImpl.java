@@ -39,7 +39,7 @@ public class TransmissionDaoImpl extends AbstractDao<Integer, Transmission> impl
 	@Override
 	public Transmission save(Transmission t) {
 		if (findTransmissionByName(t.getTransmission()) == null) {
-			getEntityManager().persist(t);
+			return persist(t);
 		}
 		return t;
 	}

@@ -30,13 +30,15 @@ public abstract class AbstractDao<PK extends Serializable, T> {
 	}
 
 	@Transactional
-	protected void persist(T entity) {
+	protected T persist(T entity) {
 		entityManager.persist(entity);
+		return entity;
 	}
 	
 	@Transactional
-	protected void update(T entity) {
+	protected T update(T entity) {
 		entityManager.merge(entity);
+		return entity;
 	}
 	
 	@Transactional

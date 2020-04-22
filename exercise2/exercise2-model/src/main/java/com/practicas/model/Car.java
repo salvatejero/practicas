@@ -10,8 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -25,67 +26,78 @@ public class Car implements Comparable<Car>, Serializable{
 	private int id;
 	
 	// Engine Information
-	@NotEmpty
-	@OneToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@NotNull
+	@ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "TRANSMISSION_ID", referencedColumnName = "ID")
 	private Transmission transmission;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name="ENGINETYPE", nullable=false)
 	private String enginetype;
 	
-	@NotEmpty
-	@OneToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "ENGINESTATISTICS_ID", referencedColumnName = "ID")
-	private EngineStatistics enginestatistics;
-	
-	@NotEmpty
-	@OneToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@NotNull
+	@ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "DRIVELINE_ID", referencedColumnName = "ID")
 	private DriveLine driveLine;
 	
-	
 	// Dimensions
-	@NotEmpty
+	@NotNull
 	@Column(name="WIDTH", nullable=false)
 	private int width;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name="LENGTH", nullable=false)
 	private int length;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name="HEIGHT", nullable=false)
 	private int height;
 	
-	
 	// Identification
-	@NotEmpty
-	@OneToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@NotNull
+	@ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "MAKE_ID", referencedColumnName = "ID")
 	private Make make;
+	
 	@NotEmpty
 	@Column(name="MODELYEAR", nullable=false)
 	private String modelyear;
+	
 	@NotEmpty
 	@Column(name="NAME", nullable=false)
 	private String name;
-	@NotEmpty
+	
+	@NotNull
 	@Column(name="YEAR", nullable=false)
 	private int year;
 	
 	// FuelInformation
-	@NotEmpty
+	@NotNull
 	@Column(name="HIGHWAYMPG", nullable=false)
 	private int highwaympg;
-	@NotEmpty
+	
+	@NotNull
 	@Column(name="CITYMPH", nullable=false)
 	private int citymph;
 	
-	@NotEmpty
-	@OneToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "fUELTYPE_ID", referencedColumnName = "ID")
+	@NotNull
+	@ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "FUELTYPE_ID", referencedColumnName = "ID")
 	private FuelType fueltype;
+	
+	
+	@NotNull
+	@ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "CLASSIFICATION_ID", referencedColumnName = "ID")
+	private Classification classification;
+	
+	@NotNull
+	@Column(name="HORSEPOWER", nullable=false)
+	private int horsepower;
+	
+	@NotNull
+	@Column(name="TORQUE", nullable=false)
+	private int torque;
 	
 	public Car() {
 		
@@ -113,14 +125,6 @@ public class Car implements Comparable<Car>, Serializable{
 
 	public void setEnginetype(String enginetype) {
 		this.enginetype = enginetype;
-	}
-
-	public EngineStatistics getEnginestatistics() {
-		return enginestatistics;
-	}
-
-	public void setEnginestatistics(EngineStatistics enginestatistics) {
-		this.enginestatistics = enginestatistics;
 	}
 
 	public int getWidth() {
@@ -209,6 +213,30 @@ public class Car implements Comparable<Car>, Serializable{
 
 	public void setDriveLine(DriveLine driveLine) {
 		this.driveLine = driveLine;
+	}
+
+	public Classification getClassification() {
+		return classification;
+	}
+
+	public void setClassification(Classification classification) {
+		this.classification = classification;
+	}
+
+	public int getHorsepower() {
+		return horsepower;
+	}
+
+	public void setHorsepower(int horsepower) {
+		this.horsepower = horsepower;
+	}
+
+	public int getTorque() {
+		return torque;
+	}
+
+	public void setTorque(int torque) {
+		this.torque = torque;
 	}
 
 	@Override

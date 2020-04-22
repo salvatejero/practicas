@@ -8,8 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="ENGINESTATISTICS")
@@ -20,11 +19,11 @@ public class EngineStatistics implements Serializable{
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name="HORSEPOWER", nullable=false)
 	private int horsepower;
 	
-	@NotEmpty
+	@NotNull
 	@Column(name="TORQUE", nullable=false)
 	private int torque;
 	

@@ -52,7 +52,7 @@ public class Transmission implements Serializable{
 
 	@Override
 	public String toString() {
-		return "{id: "+id+",make: "+transmission+"}";
+		return "{id: "+id+",transmission: "+transmission+"}";
 	}
 	
 	
