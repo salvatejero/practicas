@@ -39,7 +39,7 @@ public class DriveLineDaoImpl extends AbstractDao<Integer, DriveLine> implements
 	@Override
 	public DriveLine save(DriveLine d) {
 		if (findDriveLineByName(d.getDriveLine()) == null) {
-			getEntityManager().persist(d);
+			return persist(d);
 		}
 		return d;
 	}

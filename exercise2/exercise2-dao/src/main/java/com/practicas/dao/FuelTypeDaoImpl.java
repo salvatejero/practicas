@@ -39,7 +39,7 @@ public class FuelTypeDaoImpl extends AbstractDao<Integer, FuelType> implements F
 	@Override
 	public FuelType save(FuelType f) {
 		if (findFuelTypeByName(f.getFuelType()) == null) {
-			getEntityManager().persist(f);
+			return persist(f);
 		}
 		return f;
 	}

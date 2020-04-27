@@ -52,9 +52,9 @@ public class MainController {
 			throw new Exception("Coche no encontrado");
 		}
 		String redirect = request.getParameter("redirect");
-		Optional<Car> car = carService.getCarByPk(Integer.valueOf(pk));
+		Car car = carService.getCarByPk(Integer.valueOf(pk));
 		request.setAttribute("redirect", redirect);
-		request.setAttribute("car", car.get());
+		request.setAttribute("car", car);
 
 	}
 }

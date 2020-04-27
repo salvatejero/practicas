@@ -18,6 +18,7 @@ public class MakeDaoImpl extends AbstractDao<Integer, Make> implements MakeDao {
 	public List<Make> findMakes() {
 		try {
 			List<Make> makes = getEntityManager().createQuery("SELECT m FROM Make m ").getResultList();
+			
 			return makes;
 		} catch (NoResultException ex) {
 			return null;
@@ -39,7 +40,7 @@ public class MakeDaoImpl extends AbstractDao<Integer, Make> implements MakeDao {
 	@Override
 	public Make save(Make m) {
 		if (findMakeByName(m.getMake()) == null) {
-			getEntityManager().persist(m);
+			return persist(m);
 		}
 		return m;
 	}

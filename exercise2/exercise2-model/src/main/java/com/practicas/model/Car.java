@@ -34,7 +34,7 @@ public class Car implements Comparable<Car>, Serializable{
 	@NotNull
 	@Column(name="ENGINETYPE", nullable=false)
 	private String enginetype;
-	
+
 	@NotNull
 	@ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "DRIVELINE_ID", referencedColumnName = "ID")
@@ -84,7 +84,6 @@ public class Car implements Comparable<Car>, Serializable{
 	@ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "FUELTYPE_ID", referencedColumnName = "ID")
 	private FuelType fueltype;
-	
 	
 	@NotNull
 	@ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
