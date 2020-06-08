@@ -1,6 +1,7 @@
 package com.practicas.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -41,16 +43,13 @@ public class Car implements Comparable<Car>, Serializable{
 	private DriveLine driveLine;
 	
 	// Dimensions
-	@NotNull
-	@Column(name="WIDTH", nullable=false)
+	@Column(name="WIDTH", nullable=true)
 	private int width;
 	
-	@NotNull
-	@Column(name="LENGTH", nullable=false)
+	@Column(name="LENGTH", nullable=true)
 	private int length;
 	
-	@NotNull
-	@Column(name="HEIGHT", nullable=false)
+	@Column(name="HEIGHT", nullable=true)
 	private int height;
 	
 	// Identification
@@ -72,12 +71,10 @@ public class Car implements Comparable<Car>, Serializable{
 	private int year;
 	
 	// FuelInformation
-	@NotNull
-	@Column(name="HIGHWAYMPG", nullable=false)
+	@Column(name="HIGHWAYMPG", nullable=true)
 	private int highwaympg;
 	
-	@NotNull
-	@Column(name="CITYMPH", nullable=false)
+	@Column(name="CITYMPH", nullable=true)
 	private int citymph;
 	
 	@NotNull
@@ -90,13 +87,19 @@ public class Car implements Comparable<Car>, Serializable{
 	@JoinColumn(name = "CLASSIFICATION_ID", referencedColumnName = "ID")
 	private Classification classification;
 	
-	@NotNull
-	@Column(name="HORSEPOWER", nullable=false)
+	@Column(name="HORSEPOWER", nullable=true)
 	private int horsepower;
 	
-	@NotNull
-	@Column(name="TORQUE", nullable=false)
+	@Column(name="TORQUE", nullable=true)
 	private int torque;
+	
+	@NotNull
+	@Column(name="HYBRID", nullable=false)
+	private boolean hybrid;
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.PERSIST}) 
+	@JoinColumn(name = "car_id") 
+	private List<CarImage> carImages;
 	
 	public Car() {
 		
@@ -237,7 +240,23 @@ public class Car implements Comparable<Car>, Serializable{
 	public void setTorque(int torque) {
 		this.torque = torque;
 	}
+	
+	public boolean isHybrid() {
+		return hybrid;
+	}
 
+	public void setHybrid(boolean hybrid) {
+		this.hybrid = hybrid;
+	}
+	
+	public List<CarImage> getCarImages() {
+		return carImages;
+	}
+
+	public void setCarImages(List<CarImage> carImages) {
+		this.carImages = carImages;
+	}
+	
 	@Override
 	public int compareTo(Car o) {
 		

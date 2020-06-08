@@ -43,7 +43,8 @@ public abstract class AbstractDao<PK extends Serializable, T> {
 	
 	@Transactional
 	protected void delete(T entity) {
-		entityManager.remove(entity);
+		T managed = entityManager.merge(entity);
+		entityManager.remove(managed);
 	}
 
 }

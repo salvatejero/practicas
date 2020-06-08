@@ -1,3 +1,6 @@
+<%@page import="org.springframework.security.core.authority.SimpleGrantedAuthority"%>
+<%@page import="org.springframework.security.core.userdetails.UserDetails"%>
+<%@page import="org.springframework.security.core.context.SecurityContextHolder"%>
 <%@page import="com.practicas.model.Make"%>
 <%@page import="java.io.UnsupportedEncodingException"%>
 <%@page import="java.nio.charset.StandardCharsets"%>
@@ -19,6 +22,13 @@
 	
 	System.out.println(request.getQueryString());
 	
+	UserDetails principalUser = null;
+	
+	Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	if (principal instanceof UserDetails) {
+		principalUser = ((UserDetails) principal);
+	} 
+	
 	
 	
 	String pageActual = (String)request.getAttribute("page");
@@ -27,6 +37,9 @@
 		pageActual = "0";
 	}
 	String make = (String)request.getAttribute("make");
+	if(make == null || make.equals("")){
+		make = "0";
+	}
 	Integer yearP = (Integer)request.getAttribute("year");
 	if(yearP == null){
 		yearP = 0;
@@ -45,15 +58,15 @@
 	%>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-sm-2"></div>
-			<div class="col-sm-8">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-10">
 				<jsp:include page="head.jsp" /> 
 			</div>
-			<div class="col-sm-2"></div>
+			<div class="col-sm-1"></div>
 		</div>
 		<div class="row">
-			<div class="col-sm-2"></div>
-			<div class="col-sm-8">
+			<div class="col-sm-1"></div>
+			<div class="col-sm-10">
 				<input type="hidden" name="page" id="page" value="<%=pageActual%>"/>
 				<input type="hidden" name="makeFilterValue" id="makeFilterValue" value="<%=make%>"/>
 				<input type="hidden" name="yearFilterValue" id="yearFilterValue" value="<%=yearP%>"/>
@@ -92,7 +105,10 @@
 							<th scope="col">#</th>
 							<th scope="col">Model</th>
 							<th scope="col">Year</th>
+							<th scope="col">Make</th>
 							<th scope="col">Combustible</th>
+							<th scope="col">Hibrido</th>
+							<th scope="col">Clasificaci&oacute;n</th>
 							<th scope="col">Acciones</th>
 						</tr>
 					</thead>
@@ -106,16 +122,25 @@
 							
 							<tr>
 								<th scope="row"><%=c.getId() %></th>
+								<td><%=c.getName()%></td>
 								<td><%=c.getMake().getMake()%></td>
 								<td><%=c.getYear() %></td>
 								<td><%=c.getFueltype().getFuelType() %></td>
+								<td><%=c.isHybrid() %></td>
+								<td><%=c.getEnginetype()%></td>
 								<td>
 									<div class="dropdown">
 									  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Acciones
 									  <span class="caret"></span></button>
 									  <ul class="dropdown-menu">
-									    <li><a href="./?action=detail&pk=<%=c.getId() %>&redirect=<%=encodeValue(request.getQueryString())%>">Detalle</a></li>
+									  
+									  
+									    <li><a href="./cars?action=detail&pk=<%=c.getId() %>&redirect=<%=encodeValue(request.getQueryString())%>">Detalle</a></li>
+									  
+									  <% if(principalUser != null && principalUser.getAuthorities().contains(new SimpleGrantedAuthority("USER"))){ %>
+									  
 									    <li><a href="#">Eliminar</a></li>
+									  <%} %>
 									  </ul>
 									</div>
 								</td>
@@ -151,7 +176,7 @@
 				  </ul>
 				</nav>
 			</div>
-			<div class="col-sm-2"></div>
+			<div class="col-sm-1"></div>
 		</div>
 	</div>
 	<%!  private static String encodeValue(String value) {

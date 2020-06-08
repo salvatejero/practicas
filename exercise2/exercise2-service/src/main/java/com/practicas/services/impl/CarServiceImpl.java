@@ -24,8 +24,12 @@ public class CarServiceImpl implements CarService {
 	}
 
 	@Override
-	public List<Car> getCars() {
-		return null;
+	public List<Car> getCars(int page, int pageSize) {
+		int pageSizeP = pageSize;
+		if(pageSizeP <=0) {
+			pageSizeP = 25;
+		}
+		return carDao.findPaginationCars(page, pageSizeP);
 	}
 
 	@Override
@@ -45,7 +49,7 @@ public class CarServiceImpl implements CarService {
 
 	@Override
 	public long getTotalCar() {
-		return 0;
+		return carDao.getTotalCat();
 	}
 
 	@Override
@@ -57,5 +61,10 @@ public class CarServiceImpl implements CarService {
 	public Car save(Car c) {
 		return carDao.save(c);
 	}
-
+	
+	@Override
+	public Car update(Car c) {
+		
+		return carDao.update(c);
+	}
 }

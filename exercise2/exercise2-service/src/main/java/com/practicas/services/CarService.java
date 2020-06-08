@@ -11,7 +11,7 @@ public interface CarService {
 
 	public  Car getCarByPk(int pk);
 	
-	public List<Car> getCars();
+	public List<Car> getCars(int page, int pageSize);
 	
 	public List<Car> getCars(List<Predicate<Car>> ps);
 	
@@ -24,5 +24,7 @@ public interface CarService {
 	public long getCarsCount(List<Predicate<Car>> ps);
 	
 	public Car save(Car c);
+	
+	public Car update(Car c);
 	
 }

@@ -1,7 +1,6 @@
 package com.practicas.servlet.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +19,7 @@ public class MainController {
 	
 	public void mainAction(HttpServletRequest request, HttpServletResponse response) {
 
-		List<Car> cars = carService.getCars(0, 9, null);
+		List<Car> cars = carService.getCars(0, 25);
 		long count = carService.getTotalCar();
 
 		request.setAttribute("total", count);

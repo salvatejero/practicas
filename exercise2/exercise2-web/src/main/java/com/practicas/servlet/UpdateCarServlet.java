@@ -1,22 +1,34 @@
 package com.practicas.servlet;
 
 import java.io.IOException;
+import java.io.ObjectInputStream.GetField;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import org.apache.commons.io.IOUtils;
 
 import com.practicas.model.Car;
-import com.practicas.services.CarService;
-import com.practicas.services.data.DatabaseJson;
+import com.practicas.model.CarImage;
+
 
 @WebServlet(name = "UpdateCarServlet", urlPatterns = { "/update" })
-public class UpdateCarServlet extends HttpServlet {
+@MultipartConfig(location="/tmp", 
+	fileSizeThreshold=1024*1024,
+	maxFileSize=1024*1024*5, 
+	maxRequestSize=1024*1024*5*5
+)
+
+public class UpdateCarServlet extends AbstractServlet {
 
 	/**
 	 * 
@@ -33,10 +45,53 @@ public class UpdateCarServlet extends HttpServlet {
 
 		String engineType = request.getParameter("enginetype");
 		String driveline = request.getParameter("driveline");
-		
+		String name = request.getParameter("name");
 		String pk = request.getParameter("pk");
 		
+		
 		String redirect = request.getParameter("redirect");
+		//Part pPepe = request.getPart("pepe");
+		
+		List<Part> fileParts = request.getParts().stream().filter(part -> part.getName().contains("image") && part.getSize() > 0).collect(Collectors.toList());
+		List<CarImage> cImages = new ArrayList<>();
+		Car c = carService.getCarByPk(Integer.valueOf(pk));		
+		for(Part p: fileParts) {
+			byte[] bytes = IOUtils.toByteArray(p.getInputStream());
+			String nameImage = p.getSubmittedFileName();
+			CarImage cImage = new CarImage();
+			cImage.setImage(bytes);
+			cImage.setName(nameImage);
+			cImages.add(cImage);
+		}
+		
+		
+		// Validator
+		if(name != null) {
+			if(!cImages.isEmpty()) {
+				c.setCarImages(cImages);
+				
+			}
+			c = carService.update(c);
+			if (1 > 0) {
+				c = carService.getCarByPk(Integer.valueOf(pk));	
+				if(!cImages.isEmpty()) {
+					c.setCarImages(cImages);
+					c = carService.update(c);
+				}
+			}
+		}
+		
+		
+		
+		
+		try {
+			mainController.detail(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		request.setAttribute("executed", "ok");
+		
 		
 		// Validar 
 		
@@ -59,7 +114,7 @@ public class UpdateCarServlet extends HttpServlet {
 			}
 		}*/
 		
-		request.getRequestDispatcher("../?"+decodeValue(redirect)).forward(request, response);;
+		request.getRequestDispatcher("./detail.jsp").forward(request, response);;
 	
 	}
 	

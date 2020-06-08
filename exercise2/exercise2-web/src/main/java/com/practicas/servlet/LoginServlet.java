@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 @WebServlet(name = "LoginServlet", 
 	urlPatterns = { "", "/login" }, 
 	initParams = {@WebInitParam(name = "login", value = "test") , @WebInitParam(name = "pass", value = "test") })
@@ -19,7 +22,10 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-
+		PasswordEncoder encoder = new BCryptPasswordEncoder();
+		System.out.println(encoder.encode("test"));
+		
+		
 		request.getRequestDispatcher("./login.jsp").forward(request, response);
 	}
 

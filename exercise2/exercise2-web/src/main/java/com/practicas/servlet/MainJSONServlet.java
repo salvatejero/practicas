@@ -33,7 +33,7 @@ public class MainJSONServlet extends AbstractServlet {
 		filters.put("makes", utilsService.getCarsMakes());
 		filters.put("years", utilsService.getCarsYears());
 		pagina.setFilters(filters);
-		pagina.setCars(carService.getCars());
+		//pagina.setCars(carService.getCars());
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
