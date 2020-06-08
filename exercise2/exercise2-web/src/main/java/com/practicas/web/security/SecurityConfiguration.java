@@ -65,10 +65,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	}
 
-	@Bean
+	/*@Bean
 	public CustomBasicAuthenticationEntryPoint getBasicAuthEntryPoint() {
 		return new CustomBasicAuthenticationEntryPoint();
-	}
+	}*/
 
 	/* To allow Pre-flight [OPTIONS] request from browser */
 	@Override
